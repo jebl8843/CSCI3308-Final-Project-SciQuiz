@@ -1,0 +1,20 @@
+{
+  "name": "csci3308-final-project-sciquiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jebl8843/CSCI3308-Final-Project-SciQuiz.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jebl8843/CSCI3308-Final-Project-SciQuiz/issues"
+  },
+  "homepage": "https://github.com/jebl8843/CSCI3308-Final-Project-SciQuiz#readme"
+}
