@@ -1,0 +1,9 @@
+Meeting notes oct 31st TA+after team meeting 
+ - Talked about basic milestones for project
+ - made sure we had the wireframes and project board on git hub 
+ - talked about jeopardy questions and using the api 
+    -- do we call once or call once? 
+ - talked about use diagrams, what they are and how use them
+ - completing the project board
+ - complete features
+   -- in project board
