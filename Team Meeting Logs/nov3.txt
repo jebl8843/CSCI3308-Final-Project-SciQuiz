@@ -1,0 +1,14 @@
+lab meeting thursday
+Creating our unit test plan 
+    - analyzed our website 
+    - defined each thing to test
+    - defined success of test
+    - defined how to test
+ - creating the testing and doing it through Jest 
+ - things to test, will be the pages (login, logout, quiz) and the quiz function itself
+   along with the leaderboard
+
+Updating project board - defining the SQL database the table and the values in the table
+
+discussed background.js file and the different API calls we will need to use
+    -- defined the different post/get/put calls for each function
