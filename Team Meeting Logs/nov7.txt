@@ -1,0 +1,9 @@
+nov7th 
+Tlaked about sm deployable by thursday, without error
+focus more on getting the frontend presentable
+get shit done
+
+After
+    - Meeting with team, fixed docker issues
+    - worked on profile, home Calls in index.js
+    - working on something to depoloy
