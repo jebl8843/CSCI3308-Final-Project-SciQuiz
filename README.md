@@ -1,10 +1,9 @@
 # CSCI3308-Final-Project-SciQuiz
-##Application Description:
+## Application Description:
 	Application Name: Quise
 	Application is as a web-based program that serves quizzes about various topics and provides a leaderboard service to rank users against each other.
 
-##Contributors:
-	Names:      Github Usernames:       
+## Contributors:       
 	Clayton		Narrosh
 	Jesse		jebl8843
 	Tyson		Tyson-Trofino
@@ -12,15 +11,15 @@
 	Joseph		jkneusel
 	Simon		simondoesstuff
 
-##Technology Stack:
+## Technology Stack:
 	Node.js
 	Express.js
 	***Further to be announced***
-##Prerequisites:
+## Prerequisites:
 **TBA**
-##Instructions to run locally:
+## Instructions to run locally:
 **TBA**
-##Instructions to run tests:
+## Instructions to run tests:
 **TBA**
-##Link to deployed version:
+## Link to deployed version:
 **TBA**
