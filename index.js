@@ -18,7 +18,8 @@ const dbConfig = {
 };
 
 
-  
+const db = pgp(dbConfig);
+
 // test your database
 db.connect()
 .then(obj => {
@@ -31,13 +32,7 @@ db.connect()
 
 app.set('view engine', 'ejs');
 
-app.use(
-    session({
-      secret: process.env.SESSION_SECRET,
-      saveUninitialized: false,
-      resave: false,
-    })
-  );
+
 
 
   // for checking to make sure connection to SQL database worked
@@ -45,6 +40,10 @@ app.use(
   app.listen(3000);
   console.log('Server is listening on port 3000');
 
+  app.get('/', (req, res) => {
+
+    res.redirect('/login'); //this will call the /anotherRoute route in the API
+  });
 
   // API calls for the login/register pages
   app.get('/login', (req,res) =>{

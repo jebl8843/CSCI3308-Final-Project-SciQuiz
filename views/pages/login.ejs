@@ -1,5 +1,19 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menuLogin') %>
 
+<main>
+    <div class="container">
+        <h1>Login</h1>
+        <form class="Register" id="event-modal-form" action="/login" method="POST">
+            <label for="username" class="form-label">Username</label>
+            <input type="username" id="username" name="username" class="form-control">
+
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name = "password" class="form-control">
+    
+            <button id="submit_button" class="btn btn-primary" type="submit">Login</button>
+            <a href="./register" class="link-primary">Register</a>
+        </form>
+    </div>
 
 <%- include ('../partials/footer') %>
