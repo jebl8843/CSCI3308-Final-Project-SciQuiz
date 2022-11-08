@@ -17,7 +17,7 @@ const dbConfig = {
     password: process.env.POSTGRES_PASSWORD,
 };
 
-
+const db = pgp(dbConfig);
   
 // test your database
 db.connect()
@@ -136,3 +136,34 @@ const auth = (req, res, next) => {
   }
   next();
 };
+
+app.get('/profile', async (req, res) => {
+
+    const query = "SELECT * FROM users WHERE username = $1"; //no way this works first try
+    const rankquery = "SELECT COUNT(*) FROM USERS WHERE CAST(correctAns AS float)/quizTaken*5) > CAST((SELECT correctAns FROM users WHERE username = $1) AS float)/(SELECT quizTaken FROM users WHERE username = $1)*5)";
+    db.any(query).then(async (data) => {
+        db.any(rankquery).then(async (rank) => {
+            res.render("/pages/profile", {
+                username: data.username,
+                quizTaken: data.quizTaken,
+                correctAns: data.correctAns,
+                rank: rank
+            });
+        });
+    }).catch((err)=>{
+        console.log(err);
+        res.send("An error occurred obtaining profile information");
+        res.redirect("/home");
+    });
+});
+
+app.post('/profile', async (req, res) => {
+
+    const query = null; //TODO once db is finalized
+    db.any(query, [req/*TODO*/]).then(async (data) => {
+        res.send("Updated successfully");//TODO update once db is finished
+    }).catch((err)=>{
+        console.log(err);
+        res.send("An error occurred while updating profile information");
+    });
+});
