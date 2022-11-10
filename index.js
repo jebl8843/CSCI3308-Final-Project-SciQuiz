@@ -18,7 +18,7 @@ const dbConfig = {
 };
 
 const db = pgp(dbConfig);
-  
+
 // test your database
 db.connect()
 .then(obj => {
@@ -31,13 +31,6 @@ db.connect()
 
 app.set('view engine', 'ejs');
 
-app.use(
-    session({
-      secret: process.env.SESSION_SECRET,
-      saveUninitialized: false,
-      resave: false,
-    })
-  );
 
 
   // for checking to make sure connection to SQL database worked
@@ -45,15 +38,29 @@ app.use(
   app.listen(3000);
   console.log('Server is listening on port 3000');
 
+  app.get('/', (req, res) => {
+
+    res.redirect('/login'); //this will call the /anotherRoute route in the API
+  });
 
   // API calls for the login/register pages
   app.get('/login', (req,res) =>{
     res.render('pages/login');
-  })
+  });
 
   app.get('/register', (req,res) =>{
     res.render('pages/register');
-  })
+  });
+
+  app.get('/profile', (req, res) =>
+{
+  res.render('pages/profile');
+});
+
+app.get('/home', (req, res) =>
+{
+  res.render('pages/home');
+});
 
 
 // API call for login page, gets the username and password to check agasint the SQL database
@@ -78,11 +85,12 @@ app.use(
             else 
             {
                 req.session.user = {
-                api_key: process.env.API_KEY,
-                  };
+                  api_key: process.env.API_KEY,
+                  name: user,
+                };
                   req.session.save();
                   // redirect to quiz page 
-                  res.redirect("/quiz");
+                  res.redirect("/home");
             }
             
           })
@@ -114,16 +122,17 @@ app.use(
             else
             {
                 req.session.user = {
-                    api_key: process.env.API_KEY,
-                      };
+                      api_key: process.env.API_KEY,
+                      name: user,
+                    };
                       req.session.save();
-                      res.redirect("/page");
+                      res.redirect("/home");
             }
 
           })
           .catch((err) => {
             console.log(err);
-            res.redirect("/register");
+            // res.redirect("/register", user);
           });
     });
 
@@ -167,3 +176,11 @@ app.post('/profile', async (req, res) => {
         res.send("An error occurred while updating profile information");
     });
 });
+
+
+app.post('/home', (req,req) =>
+{
+  res.render('pages/home');
+})
+
+
