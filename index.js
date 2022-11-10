@@ -34,7 +34,6 @@ app.set('view engine', 'ejs');
 
 
 
-
   // for checking to make sure connection to SQL database worked
   // take out for final product
   app.listen(3000);
@@ -48,11 +47,21 @@ app.set('view engine', 'ejs');
   // API calls for the login/register pages
   app.get('/login', (req,res) =>{
     res.render('pages/login');
-  })
+  });
 
   app.get('/register', (req,res) =>{
     res.render('pages/register');
-  })
+  });
+
+  app.get('/profile', (req, res) =>
+{
+  res.render('pages/profile');
+});
+
+app.get('/home', (req, res) =>
+{
+  res.render('pages/home');
+});
 
 
 // API call for login page, gets the username and password to check agasint the SQL database
@@ -77,11 +86,12 @@ app.set('view engine', 'ejs');
             else 
             {
                 req.session.user = {
-                api_key: process.env.API_KEY,
-                  };
+                  api_key: process.env.API_KEY,
+                  name: user,
+                };
                   req.session.save();
                   // redirect to quiz page 
-                  res.redirect("/quiz");
+                  res.redirect("/home");
             }
             
           })
@@ -113,16 +123,17 @@ app.set('view engine', 'ejs');
             else
             {
                 req.session.user = {
-                    api_key: process.env.API_KEY,
-                      };
+                      api_key: process.env.API_KEY,
+                      name: user,
+                    };
                       req.session.save();
-                      res.redirect("/page");
+                      res.redirect("/home");
             }
 
           })
           .catch((err) => {
             console.log(err);
-            res.redirect("/register");
+            // res.redirect("/register", user);
           });
     });
 
@@ -135,3 +146,24 @@ const auth = (req, res, next) => {
   }
   next();
 };
+
+
+//unifinished
+// app.post('/profile', (req, res) =>
+// {
+//   const query = "SELECT * from users where username = req.session.user.name";
+//   db.one(query)
+//   .then((data) =>
+//   {
+//     res.render('/pages/profile', 
+//     {
+//       results: 
+//     })
+//   })
+// });
+
+app.post('/home', (req,req) =>
+{
+  res.render('pages/home');
+})
+

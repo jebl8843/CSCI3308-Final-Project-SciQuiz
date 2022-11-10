@@ -1,23 +1,52 @@
 <%- include ('../partials/header') %>
     <%- include ('../partials/menuLogin') %>
 
-        <main>
-            <div class="container">
-                <h2 style="text-align: center">Welcome to the Quizzes Website</h2>
-                <h3 style="text-align: center">Login to Test Your Knowledge</h3>
-            </div>
-            <div class="container">
-                <h1>Login</h1>
-                <form class="Register" id="event-modal-form" action="/login" method="POST">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="username" id="username" name="username" class="form-control">
+<main>
+  <div class="container-fluid">
+    <!DOCTYPE html>
+    <html>
+    <style>
+    div {
+        height: 1000px;
+        background: linear-gradient(to bottom, #33ccff 0%, #ffd700 100%)
+    }
+    </style>
+    <body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>      
+    <center><MARQUEE style="FILTER: wave(add=10,phase=3,freq=2,strength=10)" scrollAmount=2 scrollDelay=5 direction=up width=1200 height=120><FONT style="FONT-SIZE: 50px; FONT-FAMILY: monospace">
+    <CENTER><B><FONT color=dodgerblue>Welcome to Sciquiz!</FONT></B></CENTER></MARQUEE></center>
+    <br>
+    <br>
+    <br>
+    <center><h1 style="font-family: monospace;" "color:Tomato;">Login</h1></center>
+    <center><form action="/login" method = "POST">
+      <label for="fname"></label><br>
+      <input type="text" id="username" size="50" placeholder="Enter Username" name="username" value=""><br>
+      <br>
+      <label for="psw"><b></b></label>
+      <input type="password" size="50" placeholder="Enter Password" name="psw" required>
+      <br>
+      <br>
+      <input type="submit" value="Login">
+    </form> </center>
+    <p></p>
+    <center><button>
+      <a href = "/register">
+        Don't have an account? Register Here!
+      </a>
+    </button></center>
 
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" name="password" class="form-control">
+</body>
+</html>
 
-                    <button id="submit_button" class="btn btn-primary" type="submit">Login</button>
-                    <a href="./register" class="link-primary">Register</a>
-                </form>
-            </div>
+  </div>
+</main>
 
-            <%- include ('../partials/footer') %>
+<%- include ('../partials/footer') %>
