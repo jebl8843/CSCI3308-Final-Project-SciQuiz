@@ -1,0 +1,13 @@
+November 10th 
+
+Lab -- Cloud computing 
+    difference between using cloud and on base services 
+    Saas, Isass and Psass
+    advantages/disadvantages
+
+Team 
+    - fixed docker/cloud services issue
+    - worked on getting ready to deploy our login page
+    - talked about next goals
+    - adding epic and user stories, finishing some as well
+    - worked on index.js calls as well 
