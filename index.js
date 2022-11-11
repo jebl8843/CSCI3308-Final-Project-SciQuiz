@@ -147,7 +147,20 @@ const auth = (req, res, next) => {
 
 
 //unifinished
-app.post('/profile', (req, res) =>
+// app.post('/profile', (req, res) =>
+// {
+//   const query = "SELECT * from users where username = req.session.user.name";
+//   db.one(query)
+//   .then((data) =>
+//   {
+//     res.render('/pages/profile', 
+//     {
+//       results: 
+//     })
+//   })
+// });
+
+app.post('/home', (req,res) =>
 {
   const query = "SELECT * from users where username = req.session.user.name";
   db.one(query)
