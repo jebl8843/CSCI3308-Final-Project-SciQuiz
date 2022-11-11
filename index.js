@@ -1,3 +1,5 @@
+// this file runs on the backend
+
 const express = require('express');
 const app = express();
 const pgp = require('pg-promise')();
