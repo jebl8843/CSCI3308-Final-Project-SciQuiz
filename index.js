@@ -162,7 +162,7 @@ const auth = (req, res, next) => {
 //   })
 // });
 
-app.post('/home', (req,req) =>
+app.post('/home', (req,res) =>
 {
   res.render('pages/home');
 })
