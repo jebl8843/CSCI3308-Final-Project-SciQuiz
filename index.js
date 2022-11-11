@@ -31,9 +31,6 @@ db.connect()
 });
 
 app.set('view engine', 'ejs');
-
-
-
   // for checking to make sure connection to SQL database worked
   // take out for final product
   app.listen(3000);
@@ -59,7 +56,8 @@ app.set('view engine', 'ejs');
 });
 
 app.get('/home', (req, res) =>
-{
+{ const { name } = req.session;
+
   res.render('pages/home');
 });
 
@@ -119,7 +117,7 @@ app.get('/home', (req, res) =>
             {
                 res.redirect("/register");
             }
-            // if so then save session and contiunre to quiz page
+            // if so then save session and contiunre to quiz page which is home.ejs
             else
             {
                 req.session.user = {
@@ -149,21 +147,31 @@ const auth = (req, res, next) => {
 
 
 //unifinished
-// app.post('/profile', (req, res) =>
-// {
-//   const query = "SELECT * from users where username = req.session.user.name";
-//   db.one(query)
-//   .then((data) =>
-//   {
-//     res.render('/pages/profile', 
-//     {
-//       results: 
-//     })
-//   })
-// });
-
-app.post('/home', (req,req) =>
+app.post('/profile', (req, res) =>
 {
-  res.render('pages/home');
-})
+  const query = "SELECT * from users where username = req.session.user.name";
+  db.one(query)
+  .then((data) =>
+  {
+    if(!data)
+    {
+      // send error
+    }
+    else
+    {
+      const {username} = data.name
+      const {}
+
+      // finish
+      res.render('/pages/profile', 
+      {
+        username: 
+      })
+    }
+    
+
+
+  })
+});
+
 
