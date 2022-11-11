@@ -7,3 +7,4 @@ After
     - Meeting with team, fixed docker issues
     - worked on profile, home Calls in index.js
     - working on something to depoloy
+    - Simon helped Tyson fix a lot of dependency-related errors in the package JSON
