@@ -4,12 +4,12 @@
 	Application is as a web-based program that serves quizzes about various topics and provides a leaderboard service to rank users against each other.
 
 ## Contributors:       
-	Clayton		Narrosh
-	Jesse		jebl8843
-	Tyson		Tyson-Trofino
-	Caleb		cekcreator
-	Joseph		jkneusel
-	Simon		simondoesstuff
+	Clayton Dwyer		Narrosh
+	Jesse Black		jebl8843
+	Tyson Trofino		Tyson-Trofino
+	Caleb Kumar		cekcreator
+	Joseph Kneusel		jkneusel
+	Simon Walker		simondoesstuff
 
 ## Technology Stack:
 	Node.js
