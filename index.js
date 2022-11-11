@@ -159,7 +159,7 @@ const auth = (req, res, next) => {
 //     })
 //   })
 // });
-
+/*
 app.post('/home', (req,res) =>
 {
   const query = "SELECT * from users where username = req.session.user.name";
@@ -175,7 +175,7 @@ app.post('/home', (req,res) =>
       const {username} = data.name
 
       // finish
-      res.render('/pages/profile', 
+      res.render('/pages/profile'), 
       {
         username: 
       })
@@ -185,5 +185,4 @@ app.post('/home', (req,res) =>
 
   })
 });
-
-
+*/
