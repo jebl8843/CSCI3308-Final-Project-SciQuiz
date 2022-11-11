@@ -159,6 +159,7 @@ const auth = (req, res, next) => {
 //     })
 //   })
 // });
+
 /*
 app.post('/home', (req,res) =>
 {
@@ -186,3 +187,31 @@ app.post('/home', (req,res) =>
   })
 });
 */
+
+
+// app.post('/home', (req,res) =>
+// {
+//   const query = "SELECT * from users where username = req.session.user.name";
+//   db.one(query)
+//   .then((data) =>
+//   {
+//     if(!data)
+//     {
+//       // send error
+//     }
+//     else
+//     {
+//       const {username} = data.name
+//
+//       // finish
+//       res.render('/pages/profile',
+//       {
+//         username:
+//       })
+//     }
+//
+//
+//
+//   })
+// });
+
