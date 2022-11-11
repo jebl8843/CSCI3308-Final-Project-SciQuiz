@@ -173,7 +173,6 @@ app.post('/home', (req,res) =>
     else
     {
       const {username} = data.name
-      const {}
 
       // finish
       res.render('/pages/profile', 
