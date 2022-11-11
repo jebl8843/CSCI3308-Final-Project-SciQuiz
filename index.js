@@ -6,7 +6,7 @@ const pgp = require('pg-promise')();
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
-
+const tdbApi = require('./resources/js/tdbApi.js');
 
 // adding the database connection verification
 
