@@ -145,23 +145,24 @@ const auth = (req, res, next) => {
   next();
 };
 
+app.get('/leaderboard', (req, res) =>
+{ 
+  res.render('pages/leaderboard');
+});
 
-//unifinished
-// app.post('/profile', (req, res) =>
-// {
-//   const query = "SELECT * from users where username = req.session.user.name";
-//   db.one(query)
-//   .then((data) =>
-//   {
-//     res.render('/pages/profile', 
-//     {
-//       results: 
-//     })
-//   })
-// });
+app.post('/leaderboard',(req,res) =>
+{
+  const sql = "SELECT username FROM users ORDER BY correctAns DESC 3";
+  db.any(sql)
+    .then((data)=>{
+      
+    })
+
+
+});
 
 /*
-app.post('/home', (req,res) =>
+app.post('/profile', (req,res) =>
 {
   const query = "SELECT * from users where username = req.session.user.name";
   db.one(query)
@@ -170,48 +171,29 @@ app.post('/home', (req,res) =>
     if(!data)
     {
       // send error
+      const error = "error profile not found";
+      res.render('/pages/profile', 
+      {
+        err: error, 
+      })
     }
     else
     {
-      const {username} = data.name
+      const {userName} = data.name
+      const {numWins} = data.quizTaken
+      const {pass} = data.password
+      const {correct} = data.correctAns
 
       // finish
-      res.render('/pages/profile'), 
+      res.render('/pages/profile', 
       {
-        username: 
+        username: userName,
+        password: pass,
+        numCorrect: correct,
+        wins: numWins,
       })
     }
-    
-
-
   })
 });
 */
-
-
-// app.post('/home', (req,res) =>
-// {
-//   const query = "SELECT * from users where username = req.session.user.name";
-//   db.one(query)
-//   .then((data) =>
-//   {
-//     if(!data)
-//     {
-//       // send error
-//     }
-//     else
-//     {
-//       const {username} = data.name
-//
-//       // finish
-//       res.render('/pages/profile',
-//       {
-//         username:
-//       })
-//     }
-//
-//
-//
-//   })
-// });
 
