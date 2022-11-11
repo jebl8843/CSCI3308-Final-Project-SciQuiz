@@ -145,6 +145,21 @@ const auth = (req, res, next) => {
   next();
 };
 
+app.get('/leaderboard', (req, res) =>
+{ 
+  res.render('pages/leaderboard');
+});
+
+app.post('/leaderboard',(req,res) =>
+{
+  const sql = "SELECT username FROM users ORDER BY correctAns DESC 3";
+  db.any(sql)
+    .then((data)=>{
+      
+    })
+
+
+});
 
 //unifinished
 // app.post('/profile', (req, res) =>
@@ -214,4 +229,5 @@ app.post('/home', (req,res) =>
 //
 //   })
 // });
+
 
