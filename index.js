@@ -22,6 +22,7 @@ const dbConfig = {
 
 const db = pgp(dbConfig);
 
+
 // test your database
 db.connect()
 .then(obj => {
@@ -35,11 +36,23 @@ db.connect()
 app.set('view engine', 'ejs');
   // for checking to make sure connection to SQL database worked
   // take out for final product
-  app.listen(3000);
-  console.log('Server is listening on port 3000');
+  app.use(bodyParser.json());
+
+  app.use(
+      session({
+        secret: "SECRET",
+        saveUninitialized: false,
+        resave: false,
+      })
+    );
+    
+    app.use(
+      bodyParser.urlencoded({
+        extended: true,
+      })
+    );
 
   app.get('/', (req, res) => {
-
     res.redirect('/login'); //this will call the /anotherRoute route in the API
   });
 
@@ -59,7 +72,6 @@ app.set('view engine', 'ejs');
 
 app.get('/home', (req, res) =>
 { const { name } = req.session;
-
   res.render('pages/home');
 });
 
@@ -70,7 +82,6 @@ app.get('/home', (req, res) =>
     const user = req.body.username;
     const query = "SELECT * FROM users WHERE username = $1";
     const values = [user];
-
     db.one(query, values)
             .then(async (data) => {
             user.username = data.username;
@@ -103,21 +114,26 @@ app.get('/home', (req, res) =>
 
   // Register submission
   app.post('/register', async (req, res) => {
-    //the logic goes here
+
     const user = req.body.username;
     const hash = await bcrypt.hash(req.body.password, 10);
-
-    const query = "INSERT INTO users (username, password) VALUES ($1, $2);"
-    db.any (query, [user, hash])
+    const query = "INSERT INTO users (username, password) VALUES ($1, $2);";
+    const q2 = "SELECT * FROM users WHERE username = $1;";
+    db.task ('get-everything', task => {
+      return task.batch ([
+        task.any(query, [user, hash]),
+        task.any(q2, [user])
+      ])})
         .then(async (data) => {
-            user.username = data.user;
-            hash.password = data.password;
-            const match1 = await bcrypt.compare(req.body.password, data.password);
-
-            // extra check to see if user exsists
-            if (match1)
+            //data[1][0].username; // data is a 2d array to access the info we need index [1][0]
+            
+            if (data[1][0].username == user)
             {
-                res.redirect("/register");
+              req.session.user = {
+                username: req.body.username,
+              };
+              req.session.save();
+              res.redirect("/home");
             }
             // if so then save session and contiunre to quiz page which is home.ejs
             else
@@ -127,7 +143,7 @@ app.get('/home', (req, res) =>
                       name: user,
                     };
                       req.session.save();
-                      res.redirect("/home");
+                      res.redirect("/login");
             }
 
           })
@@ -193,3 +209,6 @@ app.post('/profile', (req,res) =>
   })
 });
 */
+
+app.listen(3000);
+  console.log('Server is listening on port 3000');
