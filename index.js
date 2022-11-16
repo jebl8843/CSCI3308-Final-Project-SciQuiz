@@ -148,8 +148,20 @@ app.get('/profile', async (req, res) => {
 
     const query = "SELECT * FROM users WHERE username = $1"; //no way this works first try
     const rankquery = "SELECT COUNT(*) FROM USERS WHERE CAST(correctAns AS float)/quizTaken*5) > CAST((SELECT correctAns FROM users WHERE username = $1) AS float)/(SELECT quizTaken FROM users WHERE username = $1)*5)";
-    db.any(query).then(async (data) => {
+    console.log(rankquery);
+    db.any(query, 'failure').then(async (data) => {
+        console.log("val1:"+{
+            username: data.username,
+            quizTaken: data.quizTaken,
+            correctAns: data.correctAns
+        });
         db.any(rankquery).then(async (rank) => {
+            console.log("val2:"+{
+                username: data.username,
+                quizTaken: data.quizTaken,
+                correctAns: data.correctAns,
+                rank: rank
+            });
             res.render("/pages/profile", {
                 username: data.username,
                 quizTaken: data.quizTaken,
@@ -173,6 +185,25 @@ app.post('/profile', async (req, res) => {
         console.log(err);
         res.send("An error occurred while updating profile information");
     });
+});
+
+app.get('/gentest',(req,res) =>
+{
+    let passwords = ["number1", "1234", "overflow", "1342"];
+    let hashes = ["","","",""];
+    for(let i = 0; i < passwords.length; i++){
+        hashes[i] = bcrypt.hash(passwords[i], 10);
+    }
+
+    const query = "INSERT INTO users (username, password, quizTaken, correctAns) VALUES "
+                    +"('first', $1, 6, 28),"
+                    +"('failure', $2, 4, 0),"
+                    +"('mchackerson', $3, 3, 700),"
+                    +"('lessbad', $4, 5, 8)";
+    db.any(query, hashes)
+        .then((data)=>{
+            res.redirect('/');
+        });
 });
 
 
