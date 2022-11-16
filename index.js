@@ -1,10 +1,12 @@
+// this file runs on the backend
+
 const express = require('express');
 const app = express();
 const pgp = require('pg-promise')();
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
-
+const tdbApi = require('./resources/js/tdbApi.js');
 
 // adding the database connection verification
 
@@ -19,6 +21,7 @@ const dbConfig = {
 
 const db = pgp(dbConfig);
 
+
 // test your database
 db.connect()
 .then(obj => {
@@ -32,11 +35,23 @@ db.connect()
 app.set('view engine', 'ejs');
   // for checking to make sure connection to SQL database worked
   // take out for final product
-  app.listen(3000);
-  console.log('Server is listening on port 3000');
+  app.use(bodyParser.json());
+
+  app.use(
+      session({
+        secret: "SECRET",
+        saveUninitialized: false,
+        resave: false,
+      })
+    );
+    
+    app.use(
+      bodyParser.urlencoded({
+        extended: true,
+      })
+    );
 
   app.get('/', (req, res) => {
-
     res.redirect('/login'); //this will call the /anotherRoute route in the API
   });
 
@@ -56,7 +71,6 @@ app.set('view engine', 'ejs');
 
 app.get('/home', (req, res) =>
 { const { name } = req.session;
-
   res.render('pages/home');
 });
 
@@ -67,7 +81,6 @@ app.get('/home', (req, res) =>
     const user = req.body.username;
     const query = "SELECT * FROM users WHERE username = $1";
     const values = [user];
-
     db.one(query, values)
             .then(async (data) => {
             user.username = data.username;
@@ -100,21 +113,26 @@ app.get('/home', (req, res) =>
 
   // Register submission
   app.post('/register', async (req, res) => {
-    //the logic goes here
+
     const user = req.body.username;
     const hash = await bcrypt.hash(req.body.password, 10);
-
-    const query = "INSERT INTO users (username, password) VALUES ($1, $2);"
-    db.any (query, [user, hash])
+    const query = "INSERT INTO users (username, password) VALUES ($1, $2);";
+    const q2 = "SELECT * FROM users WHERE username = $1;";
+    db.task ('get-everything', task => {
+      return task.batch ([
+        task.any(query, [user, hash]),
+        task.any(q2, [user])
+      ])})
         .then(async (data) => {
-            user.username = data.user;
-            hash.password = data.password;
-            const match1 = await bcrypt.compare(req.body.password, data.password);
-
-            // extra check to see if user exsists
-            if (match1)
+            //data[1][0].username; // data is a 2d array to access the info we need index [1][0]
+            
+            if (data[1][0].username == user)
             {
-                res.redirect("/register");
+              req.session.user = {
+                username: req.body.username,
+              };
+              req.session.save();
+              res.redirect("/home");
             }
             // if so then save session and contiunre to quiz page which is home.ejs
             else
@@ -124,7 +142,7 @@ app.get('/home', (req, res) =>
                       name: user,
                     };
                       req.session.save();
-                      res.redirect("/home");
+                      res.redirect("/login");
             }
 
           })
@@ -206,9 +224,18 @@ app.get('/gentest',(req,res) =>
         });
 });
 
+app.post('/leaderboard',(req,res) =>
+{
+  const query = "SELECT username FROM users ORDER BY correctAns DESC 3";
+  db.any(query)
+    .then((data)=>{
+      res.render('pages/leaderboard',{
+        data: data.username});     
+    });
+});
 
 /*
-app.post('/home', (req,res) =>
+app.post('/profile', (req,res) =>
 {
   const query = "SELECT * from users where username = req.session.user.name";
   db.one(query)
@@ -217,49 +244,51 @@ app.post('/home', (req,res) =>
     if(!data)
     {
       // send error
+      const error = "error profile not found";
+      res.render('/pages/profile', 
+      {
+        err: error, 
+      })
     }
     else
     {
-      const {username} = data.name
+      const {userName} = data.name
+      const {numWins} = data.quizTaken
+      const {pass} = data.password
+      const {correct} = data.correctAns
 
       // finish
-      res.render('/pages/profile'), 
+      res.render('/pages/profile', 
       {
-        username: 
+        username: userName,
+        password: pass,
+        numCorrect: correct,
+        wins: numWins,
       })
     }
-    
-
-
   })
 });
 */
 
+app.get('/gentest',(req,res) =>
+{
+    let passwords = ["number1", "1234", "overflow", "1342"];
+    let hashes = ["","","",""];
+    for(let i = 0; i < passwords.length; i++){
+        hashes[i] = bcrypt.hash(passwords[i], 10);
+    }
 
-// app.post('/home', (req,res) =>
-// {
-//   const query = "SELECT * from users where username = req.session.user.name";
-//   db.one(query)
-//   .then((data) =>
-//   {
-//     if(!data)
-//     {
-//       // send error
-//     }
-//     else
-//     {
-//       const {username} = data.name
-//
-//       // finish
-//       res.render('/pages/profile',
-//       {
-//         username:
-//       })
-//     }
-//
-//
-//
-//   })
-// });
+    const query = "INSERT INTO users (username, password, quizTaken, correctAns) VALUES "
+        +"('first', $1, 6, 28),"
+        +"('failure', $2, 4, 0),"
+        +"('mchackerson', $3, 3, 700),"
+        +"('lessbad', $4, 5, 8)";
+    db.any(query, hashes)
+        .then((data)=>{
+            res.redirect('/');
+        });
+});
 
 
+app.listen(3000);
+  console.log('Server is listening on port 3000');

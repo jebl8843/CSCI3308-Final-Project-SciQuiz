@@ -3,6 +3,20 @@
 	Application Name: Quise
 	Application is as a web-based program that serves quizzes about various topics and provides a leaderboard service to rank users against each other.
 
+# Changelog
+
+## Week 11/10/2022
+
+- First deployment!
+
+## Week 11/3/2022
+
+- Mostly implemented login/register UIs
+	- Backend still in progress
+- Fixed a massive amount of index.js + dependency issues.
+
+---
+
 ## Contributors:       
 	Clayton Dwyer		Narrosh
 	Jesse Black		jebl8843
@@ -15,6 +29,7 @@
 	Node.js
 	Express.js
 	***Further to be announced***
+	
 ## Prerequisites:
 **TBA**
 ## Instructions to run locally:

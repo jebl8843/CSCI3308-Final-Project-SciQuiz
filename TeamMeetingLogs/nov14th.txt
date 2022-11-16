@@ -1,0 +1,12 @@
+Team/TA meeting - nov14th 
+
+TA 
+    -- need to work faster, need to get pages up and running
+    -- checked in on deadlines and timeline 
+    -- need to make sure we have certain things done by thursday of week of novq4th 
+
+Team meeting
+    -- planned out more stuff to do 
+    -- fixed register and login api calls
+    -- need to do quiz api call and profile api call 
+        - need to format the ejs pages of above pages as well 
