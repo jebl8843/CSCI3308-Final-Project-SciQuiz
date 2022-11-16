@@ -15,6 +15,9 @@
 	- Backend still in progress
 - Fixed a massive amount of index.js + dependency issues.
 
+## Week 11/10/2022
+- Created a query to populate test data
+
 ---
 
 ## Contributors:       
