@@ -210,5 +210,24 @@ app.post('/profile', (req,res) =>
 });
 */
 
+app.get('/gentest',(req,res) =>
+{
+    let passwords = ["number1", "1234", "overflow", "1342"];
+    let hashes = ["","","",""];
+    for(let i = 0; i < passwords.length; i++){
+        hashes[i] = bcrypt.hash(passwords[i], 10);
+    }
+
+    const query = "INSERT INTO users (username, password, quizTaken, correctAns) VALUES "
+        +"('first', $1, 6, 28),"
+        +"('failure', $2, 4, 0),"
+        +"('mchackerson', $3, 3, 700),"
+        +"('lessbad', $4, 5, 8)";
+    db.any(query, hashes)
+        .then((data)=>{
+            res.redirect('/');
+        });
+});
+
 app.listen(3000);
   console.log('Server is listening on port 3000');
