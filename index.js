@@ -21,7 +21,6 @@ const dbConfig = {
 
 const db = pgp(dbConfig);
 
-
 // test your database
 db.connect()
 .then(obj => {
@@ -73,14 +72,15 @@ app.get('/home', (req, res) =>
 // API call for login page, gets the username and password to check agasint the SQL database
 
   app.post('/login', async (req, res) =>{
-    const user = req.body.username;
+    const username = req.body.username;
+    const hash = await bcrypt.hash(req.body.password, 10);
     const query = "SELECT * FROM users WHERE username = $1";
-    const values = [user];
+    const values = [username, hash];
     db.one(query, values)
             .then(async (data) => {
-            user.username = data.username;
-            user.password = data.password;
-            const match = await bcrypt.compare(req.body.password, data.password);
+            // user.username = data.username;
+            // user.password = data.password;
+            const match = await bcrypt.compare(hash, data.password);
             
             if (match)
             {
@@ -92,7 +92,7 @@ app.get('/home', (req, res) =>
             {
                 req.session.user = {
                   api_key: process.env.API_KEY,
-                  name: user,
+                  username: username,
                 };
                   req.session.save();
                   // redirect to quiz page 
@@ -105,13 +105,14 @@ app.get('/home', (req, res) =>
             res.redirect("/register");
           });
 });
+  
 
   // Register submission
   app.post('/register', async (req, res) => {
 
     const user = req.body.username;
     const hash = await bcrypt.hash(req.body.password, 10);
-    const query = "INSERT INTO users (username, password) VALUES ($1, $2);";
+    const query = "INSERT INTO users (username, password, quizTaken, correctAns) VALUES ($1, $2, 0, 0);";
     const q2 = "SELECT * FROM users WHERE username = $1;";
     db.task ('get-everything', task => {
       return task.batch ([
@@ -119,26 +120,27 @@ app.get('/home', (req, res) =>
         task.any(q2, [user])
       ])})
         .then(async (data) => {
+            res.redirect("/login");
             //data[1][0].username; // data is a 2d array to access the info we need index [1][0]
-            
-            if (data[1][0].username == user)
-            {
-              req.session.user = {
-                username: req.body.username,
-              };
-              req.session.save();
-              res.redirect("/home");
-            }
-            // if so then save session and contiunre to quiz page which is home.ejs
-            else
-            {
-                req.session.user = {
-                      api_key: process.env.API_KEY,
-                      name: user,
-                    };
-                      req.session.save();
-                      res.redirect("/login");
-            }
+
+            // if (data[1][0].username == user)
+            // {
+            //   req.session.user = {
+            //     username: req.body.username,
+            //   };
+            //   req.session.save();
+            //   res.redirect("/home");
+            // }
+            // // if so then save session and contiunre to quiz page which is home.ejs
+            // else
+            // {
+            //     req.session.user = {
+            //           api_key: process.env.API_KEY,
+            //           name: user,
+            //         };
+            //           req.session.save();
+            //           res.redirect("/login");
+            // }
 
           })
           .catch((err) => {
@@ -158,12 +160,12 @@ const auth = (req, res, next) => {
 };
 
 app.get('/profile', async (req, res) => {
-
+    const user = req.session.user.username;
     const query = "SELECT * FROM users WHERE username = $1"; //no way this works first try
-    const rankquery = "SELECT COUNT(*) FROM USERS WHERE (CAST(correctAns AS float)/quizTaken*5) > CAST((SELECT correctAns FROM users WHERE username = $1) AS float)/(SELECT quizTaken FROM users WHERE username = $1)*5";
-    console.log(rankquery);
-    db.any(query, 'mchackerson').then(async (data) => {
-        db.any(rankquery, 'mchackerson').then(async (rank) => {
+    const rankquery = "SELECT COUNT(*) FROM USERS WHERE (CAST(correctAns AS float)/(quizTaken+.000001)*5) > CAST((SELECT correctAns FROM users WHERE username = $1) AS float)/((SELECT quizTaken FROM users WHERE username = $1)+.000001)*5";
+    //console.log(rankquery);
+    db.any(query, user).then(async (data) => {
+        db.any(rankquery, user).then(async (rank) => {
             res.render("pages/profile", {
                 username: data[0].username,
                 quiztaken: data[0].quiztaken,
@@ -186,9 +188,9 @@ app.get('/profile', async (req, res) => {
 });
 
 app.post('/profile', async (req, res) => {
-
-    const query = null; //TODO once db is finalized
-    db.any(query, [req/*TODO*/]).then(async (data) => {
+    const user = req.session.user.username;
+    const query = "UPDATE users SET quizTaken = quizTaken + $2, correctAns = correctAns + $3 WHERE username = $1";
+    db.any(query, [user, req.body.quiztaken, req.body.correctans]).then(async (data) => {
         res.send("Updated successfully");//TODO update once db is finished
     }).catch((err)=>{
         console.log(err);
@@ -198,6 +200,7 @@ app.post('/profile', async (req, res) => {
 
 app.get('/gentest',(req,res) =>
 {
+    db.any("TRUNCATE TABLE users;");
     let passwords = ["number1", "1234", "overflow", "1342"];
     let hashes = ["","","",""];
     for(let i = 0; i < passwords.length; i++){
