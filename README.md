@@ -17,6 +17,7 @@
 
 ## Week 11/10/2022
 - Created a query to populate test data
+- Finished Development of the profile page and queries
 
 ---
 
