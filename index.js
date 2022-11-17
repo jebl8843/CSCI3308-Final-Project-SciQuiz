@@ -121,32 +121,12 @@ app.get('/home', (req, res) =>
       ])})
         .then(async (data) => {
             res.redirect("/login");
-            //data[1][0].username; // data is a 2d array to access the info we need index [1][0]
-
-            // if (data[1][0].username == user)
-            // {
-            //   req.session.user = {
-            //     username: req.body.username,
-            //   };
-            //   req.session.save();
-            //   res.redirect("/home");
-            // }
-            // // if so then save session and contiunre to quiz page which is home.ejs
-            // else
-            // {
-            //     req.session.user = {
-            //           api_key: process.env.API_KEY,
-            //           name: user,
-            //         };
-            //           req.session.save();
-            //           res.redirect("/login");
-            // }
-
           })
           .catch((err) => {
             console.log(err);
             // res.redirect("/register", user);
           });
+          //res.redirect("/home");
     });
 
 
@@ -227,42 +207,6 @@ app.post('/leaderboard',(req,res) =>
         data: data.username});     
     });
 });
-
-/*
-app.post('/profile', (req,res) =>
-{
-  const query = "SELECT * from users where username = req.session.user.name";
-  db.one(query)
-  .then((data) =>
-  {
-    if(!data)
-    {
-      // send error
-      const error = "error profile not found";
-      res.render('/pages/profile', 
-      {
-        err: error, 
-      })
-    }
-    else
-    {
-      const {userName} = data.name
-      const {numWins} = data.quizTaken
-      const {pass} = data.password
-      const {correct} = data.correctAns
-
-      // finish
-      res.render('/pages/profile', 
-      {
-        username: userName,
-        password: pass,
-        numCorrect: correct,
-        wins: numWins,
-      })
-    }
-  })
-});
-*/
 
 
 app.listen(3000);
