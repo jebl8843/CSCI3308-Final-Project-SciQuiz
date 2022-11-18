@@ -178,6 +178,7 @@ app.post('/profile', async (req, res) => {
     });
 });
 
+
 app.get('/gentest',(req,res) =>
 {
     db.any("TRUNCATE TABLE users;");
@@ -186,7 +187,6 @@ app.get('/gentest',(req,res) =>
     for(let i = 0; i < passwords.length; i++){
         hashes[i] = bcrypt.hash(passwords[i], 10);
     }
-
     const query = "INSERT INTO users (username, password, quizTaken, correctAns) VALUES "
                     +"('first', $1, 6, 28),"
                     +"('failure', $2, 4, 0),"
@@ -206,6 +206,11 @@ app.post('/leaderboard',(req,res) =>
       res.render('pages/leaderboard',{
         data: data.username});     
     });
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/login");
 });
 
 
