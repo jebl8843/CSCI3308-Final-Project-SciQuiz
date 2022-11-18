@@ -210,6 +210,9 @@ app.get('/leaderboard',(req,res) =>
     });
 });
 
+app.get('/quiz',(req,res) => {
+  res.render('pages/quiz');
+});
 
 app.listen(3000);
   console.log('Server is listening on port 3000');
