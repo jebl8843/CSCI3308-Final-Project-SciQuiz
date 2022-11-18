@@ -200,13 +200,13 @@ app.get('/gentest',(req,res) =>
 
 app.get('/leaderboard',(req,res) =>
 {
-  const ranking = "SELECT username FROM users ORDER BY (CAST(correctAns AS float)/((quizTaken+0.0001)*5)) DESC LIMIT 3"
+  const ranking = "SELECT username, (CAST(correctAns AS float)/((quizTaken+0.0001)*5)) AS leaderboard FROM users ORDER BY leaderboard DESC LIMIT 3"
 
   db.any(ranking)
-    .then((data)=>{
-      //console.log(data.map(x => x.username))
+    .then((ranking)=>{
+      console.log(ranking)
       res.render('pages/leaderboard',{
-        data: data.map(x=>x.username)});     
+        data: ranking});     
     });
 });
 

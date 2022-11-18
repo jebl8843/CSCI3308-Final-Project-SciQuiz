@@ -1,8 +1,31 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menuMain') %>
 
-<div class = "container">
-    <h1>Tyson</h1>
-</div>
+<main>
+    <div class="container">
+        <h1>World Leaderboard</h1>
+        <h2>Here is the worlds best quiz takers</h2>
+      <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">Rank</th>
+              <th scope="col">Name</th>
+              <th scope="col">Score</th>
+            </tr>
+        <% for(var i = 1; i<3; i++) {%>
+            <tr>
+              <td>
+                <%=i%>
+              </td>
+              <td>
+                <%=data[i-1].username%>
+              </td>
+              <td>
+                <%=data[i-1].leaderboard%>
+              </td>
+              <% } %>
+      </table>
+    </div>
+</main>    
 
 <%- include ('../partials/footer') %>
