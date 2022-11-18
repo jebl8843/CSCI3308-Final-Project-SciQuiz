@@ -65,7 +65,7 @@ app.set('view engine', 'ejs');
 
 app.get('/home', (req, res) =>
 { const { name } = req.session;
-  res.render('pages/home');
+  res.render('pages/home', {categories: tdbApi.categories});
 });
 
 
@@ -210,9 +210,12 @@ app.get('/leaderboard',(req,res) =>
     });
 });
 
-app.get('/quiz',(req,res) => {
-  res.render('pages/quiz', {tdbApi});
+app.get('/quiz', async (req,res) => {
+  const {category, difficulty} = req.query;
+  const questions = await tdbApi.getQuestions(category, difficulty);
+  res.render('pages/quiz', {questions});
 });
+
 
 app.get("/logout", (req, res) => {
   req.session.destroy();
