@@ -1,14 +1,14 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menuMain') %>
 
-<%- console.log('tdbApi', tdbApi) %>
-<%- tdbApi.getCategories().then(x => console.log('tdbApi', x))) %>
+<%- console.log('tdbApi', tdbApi.categories) %>
 <%- tdbApi.getQuestions('Science: Computers').then(x => console.log('tdbApi', x)) %>
 
 <main>
     <div class="container-fluid">
         <h1>Quiz Page</h1>
     </div>
+    
 </main>
 
 <%- include ('../partials/footer') %>
