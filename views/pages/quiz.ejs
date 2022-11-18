@@ -2,7 +2,8 @@
 <%- include ('../partials/mainMenu') %>
 
 <%- console.log('tdbApi', tdbApi) %>
-<%- console.log('tdbApi', tdbApi.getCategories().then(console.log)) %>
+<%- tdbApi.getCategories().then(x => console.log('tdbApi', x))) %>
+<%- tdbApi.getQuestions('Science: Computers').then(x => console.log('tdbApi', x)) %>
 
 <main>
     <div class="container-fluid">
