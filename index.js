@@ -211,7 +211,7 @@ app.get('/leaderboard',(req,res) =>
 });
 
 app.get('/quiz',(req,res) => {
-  res.render('pages/quiz');
+  res.render('pages/quiz', {tdbApi});
 });
 
 app.get("/logout", (req, res) => {
