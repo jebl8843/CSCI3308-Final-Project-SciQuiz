@@ -198,13 +198,15 @@ app.get('/gentest',(req,res) =>
         });
 });
 
-app.post('/leaderboard',(req,res) =>
+app.get('/leaderboard',(req,res) =>
 {
-  const query = "SELECT username FROM users ORDER BY correctAns DESC 3";
-  db.any(query)
+  const ranking = "SELECT username FROM users ORDER BY (CAST(correctAns AS float)/((quizTaken+0.0001)*5)) DESC LIMIT 3"
+
+  db.any(ranking)
     .then((data)=>{
+      //console.log(data.map(x => x.username))
       res.render('pages/leaderboard',{
-        data: data.username});     
+        data: data.map(x=>x.username)});     
     });
 });
 
