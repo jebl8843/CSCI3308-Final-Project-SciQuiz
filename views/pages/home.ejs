@@ -1,68 +1,67 @@
 <%- include ('../partials/header') %>
-<%- include ('../partials/menuLogin') %>
+  <%- include ('../partials/menuLogin') %>
+  <main>
+    <div class="container">
+      <!DOCTYPE html>
+      <style>
+        div {
+          height: 1000px;
+          background: linear-gradient(to bottom, #33ccff 0%, #ffd700 100%)
+        }
+      </style>
+      <body>
+        <br>
+          <center>
+              <FONT style="FONT-SIZE: 50px; FONT-FAMILY: monospace">
+                <CENTER><B>
+                    <FONT color=white>Home Page</FONT>
+                  </B></CENTER>
+              </FONT>
+          <h2></h2>
+          <hr>
+          <p></p>
+          </center>
+          <br>
+          <br>
+          <br>
+          <style>
+          img:hover {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+          }
 
-<main>
-  <div class="container-fluid">
-    <!DOCTYPE html>
-    <style>
-      div {
-        height: 1000px;
-        background: linear-gradient(to bottom, #33ccff 0%, #ffd700 100%)
-      }
-    </style>
-    <body>
-      <br>
-        <center>
-            <FONT style="FONT-SIZE: 50px; FONT-FAMILY: monospace">
-              <CENTER><B>
-                  <FONT color=white>Home Page</FONT>
-                </B></CENTER>
-            </FONT>
-        <h2></h2>
-        <hr>
-        <p></p>
-        </center>
+          @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+          }
+          </style>
+          <center><MARQUEE style="FILTER: wave(add=10,phase=3,freq=2,strength=10)" scrollAmount=2 scrollDelay=5 direction=up width=1200 height=120><FONT style="FONT-SIZE: 50px; FONT-FAMILY: monospace">
+          <CENTER><B><FONT color=black>Welcome to Sciquiz!</FONT></B></CENTER></MARQUEE></center>
         <br>
         <br>
         <br>
         <style>
-        img:hover {
-          animation: shake 0.5s;
-          animation-iteration-count: infinite;
-        }
-
-        @keyframes shake {
-          0% { transform: translate(1px, 1px) rotate(0deg); }
-          10% { transform: translate(-1px, -2px) rotate(-1deg); }
-          20% { transform: translate(-3px, 0px) rotate(1deg); }
-          30% { transform: translate(3px, 2px) rotate(0deg); }
-          40% { transform: translate(1px, -1px) rotate(1deg); }
-          50% { transform: translate(-1px, 2px) rotate(-1deg); }
-          60% { transform: translate(-3px, 1px) rotate(0deg); }
-          70% { transform: translate(3px, 1px) rotate(-1deg); }
-          80% { transform: translate(-1px, -1px) rotate(1deg); }
-          90% { transform: translate(1px, 2px) rotate(0deg); }
-          100% { transform: translate(1px, -2px) rotate(-1deg); }
+        img {
+        opacity: 0.1;
         }
         </style>
-        <center><MARQUEE style="FILTER: wave(add=10,phase=3,freq=2,strength=10)" scrollAmount=2 scrollDelay=5 direction=up width=1200 height=120><FONT style="FONT-SIZE: 50px; FONT-FAMILY: monospace">
-        <CENTER><B><FONT color=black>Welcome to Sciquiz!</FONT></B></CENTER></MARQUEE></center>
-      <br>
-      <br>
-      <br>
-      <style>
-      img {
-      opacity: 0.1;
-      }
-      </style>
-      <center>
-      <marquee behavior="alternate" scrollamount="1"></marquee></center>
-      <center><img src="https://codha.org/wp-content/uploads/2015/02/cu-logo.png" width="372" height="379" alt="Buzzy bee"></marquee></center>
+        <center>
+        <marquee behavior="alternate" scrollamount="1"></marquee></center>
+        <center><img src="https://codha.org/wp-content/uploads/2015/02/cu-logo.png" width="372" height="379" alt="Buzzy bee"></marquee></center>
 
 
-    </body>
-    </html>
-  </div>
-</main>
+      </body>
+      </html>
+    </div>
+  </main>
 
 <%- include ('../partials/footer') %>
