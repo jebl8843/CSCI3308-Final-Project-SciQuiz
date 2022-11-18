@@ -5,4 +5,3 @@ CREATE TABLE users(
    quizTaken INT,
    correctAns INT
 );
-
