@@ -1,11 +1,43 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menuMain') %>
 
-<%- console.log('Here are the questions:', questions) %>
+<%- console.log('tdbApi', tdbApi.categories) %>
+<%- tdbApi.getQuestions('Science: Computers').then(x => console.log('tdbApi', x)) %>
 
 <main>
     <div class="container-fluid">
-        <h1>Quiz Page</h1>
+        <!DOCTYPE html>
+            <style>
+                div {
+                background: linear-gradient(to bottom, #33ccff 0%, #ffd700 100%)
+                }
+            </style>
+            <body>
+                <br>
+                <br>
+                <center>
+                  <MARQUEE style="FILTER: wave(add=5,phase=3,freq=2,strength=10)" scrollAmount=2 scrollDelay=5 direction=up
+                    width=1200 height=300>
+                    <FONT style="FONT-SIZE: 50px; FONT-FAMILY: monospace">
+                      <CENTER><B>
+                          <FONT color=dodgerblue>Welcome to Sciquiz!</FONT>
+                        </B></CENTER>
+                    </FONT>
+                  </MARQUEE>
+                </center>
+                <div class="card">
+                    <h1>Categories <%= Categories %></h1>
+                    <table class="table">
+                        <tbody>
+                            <% for(let i = 0; i < categories.length; i++) {%>
+                                <tr>
+                                    <td scope ="col"><%= console.log(categories[i]) %></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </body>
+        </html>
     </div>
     
 </main>

@@ -66,6 +66,12 @@ app.set('view engine', 'ejs');
 app.get('/home', (req, res) =>
 { const { name } = req.session;
   res.render('pages/home', {categories: tdbApi.categories});
+  // trying to get the value of the category button in home.ejs, idk how
+  // function myFunction() {
+  //   const x = document.getElementById("category").value;
+  //   console.log(x)
+  //   //document.getElementById("demo").innerHTML = x;
+  // }
 });
 
 
