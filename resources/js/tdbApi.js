@@ -36,10 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getQuestions = exports.categories = void 0;
+exports.getQuestion = exports.categories = void 0;
 var open_trivia_db_1 = require("open-trivia-db");
 exports.categories = Object.keys(open_trivia_db_1.CategoryNamesPretty).filter(function (x) { return !(parseInt(x) >= 0); });
-var getQuestions = function (category, difficulty) { return __awaiter(void 0, void 0, void 0, function () {
+var getQuestion = function (category, difficulty) { return __awaiter(void 0, void 0, void 0, function () {
     var categoryId;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -50,7 +50,7 @@ var getQuestions = function (category, difficulty) { return __awaiter(void 0, vo
                 if (!categoryId)
                     throw "You must provide a valid category";
                 return [4 /*yield*/, (0, open_trivia_db_1.getQuestions)({
-                        amount: 5,
+                        amount: 1,
                         difficulty: difficulty,
                         type: 'multiple',
                         category: categoryId,
@@ -59,9 +59,9 @@ var getQuestions = function (category, difficulty) { return __awaiter(void 0, vo
                     question: result.value,
                     answers: result.allAnswers,
                     correct: result.correctAnswer
-                }); })];
+                }); })[0]];
         }
     });
 }); };
-exports.getQuestions = getQuestions;
+exports.getQuestion = getQuestion;
 //# sourceMappingURL=tdbApi.js.map

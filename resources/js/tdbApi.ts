@@ -2,7 +2,7 @@ import {Category, CategoryNamesPretty, getQuestions as tdbQuestions, QuestionDif
 
 export const categories = Object.keys(CategoryNamesPretty).filter(x => !(parseInt(x) >= 0));
 
-export const getQuestions = async (category: string, difficulty?: QuestionDifficulties) => {
+export const getQuestion = async (category: string, difficulty?: QuestionDifficulties) => {
     // @ts-ignore
     difficulty ??= Object.keys(QuestionDifficulties)[Math.round(Math.random() * 2)];
     let categoryId = CategoryNamesPretty[category];
@@ -10,7 +10,7 @@ export const getQuestions = async (category: string, difficulty?: QuestionDiffic
     if (!categoryId) throw "You must provide a valid category";
 
     return (await tdbQuestions({
-        amount: 5,
+        amount: 1,
         difficulty: difficulty,
         type: 'multiple',
         category: categoryId,
@@ -18,5 +18,5 @@ export const getQuestions = async (category: string, difficulty?: QuestionDiffic
         question: result.value,
         answers: result.allAnswers,
         correct: result.correctAnswer
-    }))
+    }))[0];
 }
