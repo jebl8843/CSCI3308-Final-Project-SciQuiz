@@ -1,8 +1,7 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menuMain') %>
 
-<%- console.log('tdbApi', tdbApi.categories) %>
-<%- tdbApi.getQuestions('Science: Computers').then(x => console.log('tdbApi', x)) %>
+
 
 <main>
     <div class="container-fluid">
@@ -26,20 +25,21 @@
                   </MARQUEE>
                 </center>
                 <div class="card">
-                    <h1>Categories <%= Categories %></h1>
+                    <h1><%- question.question %></h1>
                     <table class="table">
                         <tbody>
-                            <% for(let i = 0; i < categories.length; i++) {%>
+                            <% for(let i = 0; i < question.answers.length; i++) {%>
                                 <tr>
-                                    <td scope ="col"><%= console.log(categories[i]) %></td>
+                                    <td scope ="col"><%- question.answers[i]%></td>
                                 </tr>
+                            <%}%>
                         </tbody>
                     </table>
                 </div>
             </body>
         </html>
     </div>
-    
+
 </main>
 
 <%- include ('../partials/footer') %>

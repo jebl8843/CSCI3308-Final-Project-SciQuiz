@@ -32,36 +32,39 @@ db.connect()
 });
 
 app.set('view engine', 'ejs');
-  // for checking to make sure connection to SQL database worked
-  // take out for final product
-  app.use(bodyParser.json());
 
-  app.use(
-      session({
-        secret: "SECRET",
-        saveUninitialized: false,
-        resave: false,
-      })
-    );
-    
-    app.use(
-      bodyParser.urlencoded({
-        extended: true,
-      })
-    );
 
-  app.get('/', (req, res) => {
-    res.redirect('/login'); //this will call the /anotherRoute route in the API
-  });
+// for checking to make sure connection to SQL database worked
+// take out for final product
+app.use(bodyParser.json());
 
-  // API calls for the login/register pages
-  app.get('/login', (req,res) =>{
-    res.render('pages/login');
-  });
+app.use(
+  session({
+    secret: "SECRET",
+    saveUninitialized: false,
+    resave: false,
+    async: true,
+  })
+);
 
-  app.get('/register', (req,res) =>{
-    res.render('pages/register');
-  });
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
+app.get('/', (req, res) => {
+res.redirect('/login'); //this will call the /anotherRoute route in the API
+});
+
+// API calls for the login/register pages
+app.get('/login', (req,res) =>{
+res.render('pages/login');
+});
+
+app.get('/register', (req,res) =>{
+res.render('pages/register');
+});
 
 app.get('/home', (req, res) =>
 { const { name } = req.session;
@@ -216,10 +219,11 @@ app.get('/leaderboard',(req,res) =>
     });
 });
 
-app.get('/quiz', async (req,res) => {
-  const {category, difficulty} = req.query;
-  const questions = await tdbApi.getQuestions(category, difficulty);
-  res.render('pages/quiz', {questions});
+app.get('/quiz', async (req, res) => {
+    const {category, difficulty} = req.query;
+    const question = await tdbApi.getQuestion(category, difficulty);
+    console.log(question)
+    res.render('pages/quiz', {question});
 });
 
 

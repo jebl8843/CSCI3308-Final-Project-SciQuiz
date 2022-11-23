@@ -1,10 +1,6 @@
 <%- include ('../partials/header') %>
   <%- include ('../partials/menuLogin') %>
   
-  
-  <%- console.log('Here are the categories:', categories) %>
-  
-  
   <main>
     <div class="container-fluid">
       <!DOCTYPE html>
@@ -61,11 +57,13 @@
           <h1>Categories</h1>
           <table class="table">
             <!-- displays options with buttons, cant figure out how get the value -->
-            <!-- <% for(let i = 0; i < categories.length; i++) {%>
+            <% for(let i = 0; i < categories.length; i++) {%>
                 <tr>
-                  <button type="submit" id="category" name="buttonC"> <%= categories[i] %></button>
+                  <form method="get" action='quiz' %>>
+                    <button type="submit" id="category" name="category" value=<%-`"${categories[i]}"`%>> <%= categories[i] %></button>
+                  </form>
                 </tr>
-              <% }%> -->
+              <% }%>
           </table>
         </center>
       </center>
