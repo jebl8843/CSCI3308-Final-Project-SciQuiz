@@ -213,7 +213,6 @@ app.get('/leaderboard',(req,res) =>
 
   db.any(ranking)
     .then((ranking)=>{
-      console.log(ranking)
       res.render('pages/leaderboard',{
         data: ranking});     
     });
