@@ -2,7 +2,9 @@ import {Category, CategoryNamesPretty, getQuestions as tdbQuestions, QuestionDif
 
 export const categories = Object.keys(CategoryNamesPretty).filter(x => !(parseInt(x) >= 0));
 
-export const getQuestion = async (category: string, difficulty?: QuestionDifficulties) => {
+export const difficulties = Object.values(QuestionDifficulties);
+
+export const getQuestion = async (category: CategoryNamesPretty, difficulty?: QuestionDifficulties) => {
     // @ts-ignore
     difficulty ??= Object.keys(QuestionDifficulties)[Math.round(Math.random() * 2)];
     let categoryId = CategoryNamesPretty[category];

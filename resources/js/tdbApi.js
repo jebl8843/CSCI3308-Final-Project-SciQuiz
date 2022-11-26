@@ -36,9 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getQuestion = exports.categories = void 0;
+exports.getQuestion = exports.difficulties = exports.categories = void 0;
 var open_trivia_db_1 = require("open-trivia-db");
 exports.categories = Object.keys(open_trivia_db_1.CategoryNamesPretty).filter(function (x) { return !(parseInt(x) >= 0); });
+exports.difficulties = Object.values(open_trivia_db_1.QuestionDifficulties);
 var getQuestion = function (category, difficulty) { return __awaiter(void 0, void 0, void 0, function () {
     var categoryId;
     return __generator(this, function (_a) {
