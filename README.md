@@ -5,6 +5,10 @@
 
 # Changelog
 
+## Week 11/24
+
+- Made random tests even though I was pretty sure everything was working anyway.
+
 ## Week 11/17
 
 - Successfully loading category options on the home page. Clicking any of the options brings you to the quiz section which is successfully displaying quiz questions.
