@@ -5,9 +5,14 @@
 
 # Changelog
 
+## Week 11/17
+
+- Successfully loading category options on the home page. Clicking any of the options brings you to the quiz section which is successfully displaying quiz questions.
+
 ## Week 11/10/2022
 
 - First deployment!
+- Login and registration working
 
 ## Week 11/3/2022
 

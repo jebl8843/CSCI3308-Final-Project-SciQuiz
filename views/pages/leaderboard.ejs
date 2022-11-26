@@ -1,35 +1,40 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menuMain') %>
 
-<<<<<<< HEAD
-
-=======
 <main>
-    <div class="container">
-        <h1>World Leaderboard</h1>
-        <h2>Here is the worlds best quiz takers</h2>
-      <table class="table">
+  <!DOCTYPE html>
+  <style>
+    div {
+      background: linear-gradient(to bottom, #33ccff 0%, #ffd700 100%)
+    }
+  </style>
+    <div class="container" >
+        <center><h1 style="color: dodgerblue;">World Leaderboard</h1></center>
+        <center><h2 style="color: dodgerblue">Here is The Worlds Best Quiz Takers</h2></center>
+      <table class="table" >
         <thead>
             <tr>
               <th scope="col">Rank</th>
               <th scope="col">Name</th>
               <th scope="col">Score</th>
             </tr>
-        <% for(var i = 1; i<3; i++) {%>
+            <%let i = 1%>
+        <% data.forEach(function(values)  {%>
             <tr>
               <td>
                 <%=i%>
               </td>
               <td>
-                <%=data[i-1].username%>
+                <%=values.username%>
               </td>
               <td>
-                <%=data[i-1].leaderboard%>
+                <%=values.leaderboard%>
               </td>
-              <% } %>
+              <% i++ %>
+              <% }) %>
       </table>
     </div>
+  </!DOCTYPE html>
 </main>    
->>>>>>> refs/remotes/origin/main
 
 <%- include ('../partials/footer') %>
