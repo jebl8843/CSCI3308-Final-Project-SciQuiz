@@ -8,6 +8,7 @@
 ## Week 11/24
 
 - Made random tests even though I was pretty sure everything was working anyway.
+- Home page basically done
 
 ## Week 11/17
 
