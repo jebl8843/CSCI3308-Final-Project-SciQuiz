@@ -222,7 +222,7 @@ app.get('/leaderboard',(req,res) =>
 app.get('/quiz', async (req, res) => {
     const {category, difficulty} = req.query;
     const question = await tdbApi.getQuestion(category, difficulty);
-    console.log(question)
+    console.log('Starting a quiz:', question)
     res.render('pages/quiz', {question});
 });
 
