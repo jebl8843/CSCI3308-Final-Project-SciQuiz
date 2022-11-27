@@ -1,6 +1,8 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menuMain') %>
 
+<% const countdownTime = 20; %>
+
 
 <form id="quizOverForm" action="/quizOver" method="get">
     <input type="hidden" name="correct">
@@ -67,7 +69,7 @@
                         </B></CENTER>
                     </FONT>
                   </MARQUEE>
-                    <h1 id="countdownTimer">5</h1>
+                    <h1 id="countdownTimer"><%-countdownTime%></h1>
                 </center>
                 <div class="card">
                     <h1><%- question.question %></h1>
