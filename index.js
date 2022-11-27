@@ -225,6 +225,15 @@ app.get('/quiz', async (req, res) => {
     res.render('pages/quiz', {question});
 });
 
+/**
+ * Called when a user ends a quiz, either they won or lost.
+ * @param {boolean} correct - True if the user won, false if they lost.
+ * @param {string} location - url of the page to redirect to once they view the results.
+ */
+app.get('/quizOver', async (req, res) => {
+    res.render('pages/quizOver', {correct: req.query.correct, location: req.query.location});
+});
+
 
 app.get("/logout", (req, res) => {
   req.session.destroy();

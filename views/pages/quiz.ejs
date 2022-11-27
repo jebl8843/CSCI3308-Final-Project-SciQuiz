@@ -2,7 +2,19 @@
 <%- include ('../partials/menuMain') %>
 
 
+<form id="quizOverForm" action="/quizOver" method="get">
+    <input type="hidden" name="correct">
+    <input type="hidden" name="location">
+</form>
+
 <script>
+    function quizOver(correct) {
+        const form = document.querySelector('#quizOverForm')
+        form.querySelector('input[name="location"]').value = window.location;
+        form.querySelector('input[name="correct"]').value = correct;
+        form.submit();
+    }
+
     const tick = setInterval(() => {
         const timer = document.querySelector('#countdownTimer');
         let count = parseInt(timer.textContent);
@@ -15,8 +27,9 @@
                 timer.classList.remove('pop');
             }, 150);
         } else {
-            console.log("They have run out of time!");
             clearInterval(tick);
+            console.log("They have run out of time!");
+            quizOver(false);
         }
     }, 1000);
 </script>
@@ -54,7 +67,7 @@
                         </B></CENTER>
                     </FONT>
                   </MARQUEE>
-                    <h1 id="countdownTimer">20</h1>
+                    <h1 id="countdownTimer">5</h1>
                 </center>
                 <div class="card">
                     <h1><%- question.question %></h1>
