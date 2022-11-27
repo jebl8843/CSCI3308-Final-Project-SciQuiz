@@ -1,6 +1,7 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menuMain') %>
 
+
 <style>
     .uglyBg {
         background: linear-gradient(to bottom, #33ccff 0%, #ffd700 100%)
@@ -10,8 +11,12 @@
 <main class="uglyBg h-100">
   <!DOCTYPE html>
   <style>
+    div {
+      background: linear-gradient(to bottom, #33ccff 0%, #ffd700 100%)
+    }
   </style>
     <div class="container" >
+      <body>
         <center><h1 style="color: dodgerblue;">World Leaderboard</h1></center>
         <center><h2 style="color: dodgerblue">Here is The Worlds Best Quiz Takers</h2></center>
       <table class="table" >
@@ -36,8 +41,9 @@
               <% i++ %>
               <% }) %>
       </table>
+    </body>
     </div>
-  </!DOCTYPE html>
+  </html>
 </main>    
 
 <%- include ('../partials/footer') %>
