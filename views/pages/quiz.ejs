@@ -2,6 +2,38 @@
 <%- include ('../partials/menuMain') %>
 
 
+<script>
+    const tick = setInterval(() => {
+        const timer = document.querySelector('#countdownTimer');
+        let count = parseInt(timer.textContent);
+        if (count > 0) {
+            count--;
+            timer.textContent = count.toString();
+        //    readd the pop class
+            timer.classList.add('pop');
+            setTimeout(() => {
+                timer.classList.remove('pop');
+            }, 150);
+        } else {
+            console.log("They have run out of time!");
+            clearInterval(tick);
+        }
+    }, 1000);
+</script>
+
+<style>
+    #countdownTimer.pop {
+        transform: scale(1.5);
+        color: red;
+    }
+
+    #countdownTimer {
+        transition: transform ease-in-out 150ms;
+        transform: scale(1);
+    }
+</style>
+
+
 <main>
     <div class="container-fluid">
         <!DOCTYPE html>
@@ -22,6 +54,7 @@
                         </B></CENTER>
                     </FONT>
                   </MARQUEE>
+                    <h1 id="countdownTimer">20</h1>
                 </center>
                 <div class="card">
                     <h1><%- question.question %></h1>
