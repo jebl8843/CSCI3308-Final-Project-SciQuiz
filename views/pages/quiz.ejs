@@ -29,7 +29,9 @@
                         <tbody>
                             <% for(let i = 0; i < question.answers.length; i++) {%>
                                 <tr>
-                                    <td scope ="col"><%- question.answers[i]%></td>
+                                    <form method action="quiz">
+                                        <button type="submit" id="answer" name="answer" value=<%-`"${question.answers[i]}"`%>> <%- question.answers[i]%> </button>
+                                    </form>
                                 </tr>
                             <%}%>
                         </tbody>
