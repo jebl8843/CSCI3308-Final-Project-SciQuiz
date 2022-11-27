@@ -1,0 +1,45 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/menuMain') %>
+
+<%
+ let boringMsg, coolMsg;
+
+ (() => {
+     correct = correct === 'true';
+
+     let coolWinMessages = ["Wow.", "Couldn't have done better myself", "You're a genius!", "You're a winner!", "You're a champion!", "You're a superstar!", "You're a rockstar!", "You're a legend!", "You're a god!"];
+     let coolLossMessages = ["I'm not even mad", "You should be ashamed", "That was boring", "You're a disappointment", "You're not even trying", "You're a disgrace to your family", "You're a disgrace to your ancestors", "You're a disgrace to your country", "You're a disgrace to your species"];
+
+     boringMsg = correct ? "You won." : "You lost.";
+     coolMsg = (correct ? coolWinMessages : coolLossMessages)[Math.floor(Math.random() * 9)];
+ })();
+ %>
+
+<form id="quizOverForm" action="/quizOver" method="get">
+    <input type="hidden" name="correct">
+</form>
+
+<main class="container-fluid">
+    <h1 style="margin-top: 15rem"><%= boringMsg %></h1>
+    <h3 class="p-5 text-blue"><%= coolMsg %></h3>
+
+    <button class="btn btn-primary" style="padding: 20px; margin: 20px; border-radius: 20px;" onclick="location = '<%- location %>';">
+        <%- correct ? "Crush another?" : "Waste more time?" %>
+    </button>
+</main>
+
+
+<style>
+    main {
+        display: grid;
+        place-items: center;
+        background: linear-gradient(to bottom, #33ccff 0%, #ffd700 100%)
+    }
+
+    html {
+        background: linear-gradient(to bottom, #33ccff 0%, #ffd700 100%)
+    }
+</style>
+
+
+<%- include ('../partials/footer') %>

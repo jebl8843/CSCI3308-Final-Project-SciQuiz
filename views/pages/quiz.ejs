@@ -1,6 +1,53 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/menuMain') %>
 
+<% const countdownTime = 20; %>
+
+
+<form id="quizOverForm" action="/quizOver" method="get">
+    <input type="hidden" name="correct">
+    <input type="hidden" name="location">
+</form>
+
+<script>
+    function quizOver(correct) {
+        const form = document.querySelector('#quizOverForm')
+        form.querySelector('input[name="location"]').value = window.location;
+        form.querySelector('input[name="correct"]').value = correct;
+        form.submit();
+    }
+
+    const tick = setInterval(() => {
+        const timer = document.querySelector('#countdownTimer');
+        let count = parseInt(timer.textContent);
+        if (count > 0) {
+            count--;
+            timer.textContent = count.toString();
+        //    readd the pop class
+            timer.classList.add('pop');
+            setTimeout(() => {
+                timer.classList.remove('pop');
+            }, 150);
+        } else {
+            clearInterval(tick);
+            console.log("They have run out of time!");
+            quizOver(false);
+        }
+    }, 1000);
+</script>
+
+<style>
+    #countdownTimer.pop {
+        transform: scale(1.5);
+        color: red;
+    }
+
+    #countdownTimer {
+        transition: transform ease-in-out 150ms;
+        transform: scale(1);
+    }
+</style>
+
 
 <main>
     <div class="container-fluid">
@@ -22,6 +69,7 @@
                         </B></CENTER>
                     </FONT>
                   </MARQUEE>
+                    <h1 id="countdownTimer"><%-countdownTime%></h1>
                 </center>
                 <div class="card">
                     <h1><%- question.question %></h1>

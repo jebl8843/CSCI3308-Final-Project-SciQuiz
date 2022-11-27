@@ -9,6 +9,8 @@
 
 - Made random tests even though I was pretty sure everything was working anyway.
 - Home page basically done
+- Quiz over screen works
+- Quiz has a countdown that redirects to quiz over screen
 
 ## Week 11/17
 
