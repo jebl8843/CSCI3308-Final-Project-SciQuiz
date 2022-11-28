@@ -93,19 +93,17 @@ app.get('/home', (req, res) =>
             
             if (match)
             {
-               // pass didnt match
-               console.log('pass didnt match');
-               res.redirect ('/login');
+              req.session.user = {
+                api_key: process.env.API_KEY,
+                username: username,
+              };
+                req.session.save();
+               res.redirect ('/home');
             } 
             else 
             {
-                req.session.user = {
-                  api_key: process.env.API_KEY,
-                  username: username,
-                };
-                  req.session.save();
                   // redirect to quiz page 
-                  res.redirect("/home");
+                  res.redirect("/login");
             }
             
           })
