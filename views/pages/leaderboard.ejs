@@ -12,8 +12,8 @@
   <!DOCTYPE html>
     <div class="container" >
       <body>
-        <center><h1 style="color: dodgerblue;">World Leaderboard</h1></center>
-        <center><h2 style="color: dodgerblue">Here is The Worlds Best Quiz Takers</h2></center>
+        <center><h1 style="color: white;">World Leaderboard</h1></center>
+        <center><h2 style="color: white">Here is The Worlds Best Quiz Takers</h2></center>
       <table class="table" >
         <thead>
             <tr>
@@ -24,6 +24,7 @@
             <%let i = 1%>
         <% data.forEach(function(values)  {%>
             <tr>
+              <%if(values.leaderboard) { %>
               <td>
                 <%=i%>
               </td>
@@ -31,9 +32,10 @@
                 <%=values.username%>
               </td>
               <td>
-                <%=values.leaderboard%>
+                <%=values.leaderboard+"%"%>
               </td>
               <% i++ %>
+              <%}%>
               <% }) %>
       </table>
     </body>
