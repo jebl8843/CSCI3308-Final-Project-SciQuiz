@@ -83,7 +83,7 @@
                                 <tr>
                                     <form method="post" action="profile">
                                         <input type="hidden" name="correctans" value=<%= question.correct == question.answers[i] ? 1:0%>>
-                                        <button type="submit" onclick="setTimeout(()=> quizOver(true),1)" id="answer"> <%- question.answers[i]%> </button>
+                                        <button type="submit" onclick="setTimeout(()=> quizOver(<%= question.correct == question.answers[i] %>),100)" id="answer"> <%- question.answers[i]%> </button>
                                     </form>
                                 </tr>
                             <%}%>
