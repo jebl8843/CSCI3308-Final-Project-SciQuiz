@@ -11,10 +11,12 @@
 - Home page basically done
 - Quiz over screen works
 - Quiz has a countdown that redirects to quiz over screen
+- Quiz buttons work. Quiz taking process fully done and updates profile/leaderboard accordingly.
 
 ## Week 11/17
 
 - Successfully loading category options on the home page. Clicking any of the options brings you to the quiz section which is successfully displaying quiz questions.
+- profile & leaderboard page & queries are all working
 
 ## Week 11/10/2022
 
@@ -24,7 +26,7 @@
 ## Week 11/3/2022
 
 - Mostly implemented login/register UIs
-	- Backend still in progress
+- Backend still in progress
 - Fixed a massive amount of index.js + dependency issues.
 
 ## Week 11/10/2022
