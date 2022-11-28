@@ -150,6 +150,10 @@ const auth = (req, res, next) => {
 };
 
 app.get('/profile', async (req, res) => {
+    if(req.session.user === undefined){
+        console.log("error no current user session");
+        res.send("error no current user session");
+    }
     const user = req.session.user.username;
     const query = "SELECT * FROM users WHERE username = $1"; //no way this works first try
     const rankquery = "SELECT COUNT(*) FROM USERS WHERE (CAST(correctAns AS float)/(quizTaken+.000001)*1) > CAST((SELECT correctAns FROM users WHERE username = $1) AS float)/((SELECT quizTaken FROM users WHERE username = $1)+.000001)*1";
@@ -211,7 +215,7 @@ app.get('/gentest',(req,res) =>
 
 app.get('/leaderboard',(req,res) =>
 {
-  const ranking = "SELECT username, (CAST(correctAns AS float)/((quizTaken+0.0001)*1)*100) AS leaderboard FROM users ORDER BY leaderboard DESC"
+  const ranking = "SELECT username, (CAST(correctAns AS float)/((quizTaken+0.0001)*1)*100) AS leaderboard FROM users ORDER BY leaderboard DESC 10"
 
   db.any(ranking)
     .then((ranking)=>{
