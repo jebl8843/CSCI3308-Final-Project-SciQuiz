@@ -7,10 +7,10 @@
 
 ## Week 11/24
 
-- Made random tests even though I was pretty sure everything was working anyway.
-- Home page basically done
-- Quiz over screen works
-- Quiz has a countdown that redirects to quiz over screen
+- Made randomized tests despite major confidence in the system
+- Home page mostly/completely implemented
+- "Quiz over" screen fully functional
+- Quiz has a countdown timer that redirects to "quiz over" screen
 - Quiz buttons work. Quiz taking process fully done and updates profile/leaderboard accordingly.
 
 ## Week 11/17
