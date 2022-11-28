@@ -90,20 +90,23 @@ app.get('/home', (req, res) =>
             // user.username = data.username;
             // user.password = data.password;
             const match = await bcrypt.compare(hash, data.password);
+            // console.log(match)
             
             if (match)
             {
-              req.session.user = {
-                api_key: process.env.API_KEY,
-                username: username,
-              };
-                req.session.save();
-               res.redirect ('/home');
+               // pass didnt match
+               console.log('pass didnt match');
+               res.redirect ('/login');
             } 
             else 
             {
+                req.session.user = {
+                  api_key: process.env.API_KEY,
+                  username: username,
+                };
+                  req.session.save();
                   // redirect to quiz page 
-                  res.redirect("/login");
+                  res.redirect("/home");
             }
             
           })
