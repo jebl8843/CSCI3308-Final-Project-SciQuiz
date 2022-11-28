@@ -151,7 +151,7 @@ const auth = (req, res, next) => {
 app.get('/profile', async (req, res) => {
     const user = req.session.user.username;
     const query = "SELECT * FROM users WHERE username = $1"; //no way this works first try
-    const rankquery = "SELECT COUNT(*) FROM USERS WHERE (CAST(correctAns AS float)/(quizTaken+.000001)*5) > CAST((SELECT correctAns FROM users WHERE username = $1) AS float)/((SELECT quizTaken FROM users WHERE username = $1)+.000001)*5";
+    const rankquery = "SELECT COUNT(*) FROM USERS WHERE (CAST(correctAns AS float)/(quizTaken+.000001)*1) > CAST((SELECT correctAns FROM users WHERE username = $1) AS float)/((SELECT quizTaken FROM users WHERE username = $1)+.000001)*1";
     //console.log(rankquery);
     db.any(query, user).then(async (data) => {
         db.any(rankquery, user).then(async (rank) => {
@@ -178,12 +178,13 @@ app.get('/profile', async (req, res) => {
 
 app.post('/profile', async (req, res) => {
     const user = req.session.user.username;
+    console.log(req.body.correctans);
     const query = "UPDATE users SET quizTaken = quizTaken + $2, correctAns = correctAns + $3 WHERE username = $1";
-    db.any(query, [user, req.body.quiztaken, req.body.correctans]).then(async (data) => {
-        res.send("Updated successfully");//TODO update once db is finished
+    db.any(query, [user, 1, req.body.correctans]).then(async (data) => {
+        // res.send("Updated successfully");//TODO update once db is finished
     }).catch((err)=>{
         console.log(err);
-        res.send("An error occurred while updating profile information");
+        // res.send("An error occurred while updating profile information");
     });
 });
 
@@ -209,7 +210,7 @@ app.get('/gentest',(req,res) =>
 
 app.get('/leaderboard',(req,res) =>
 {
-  const ranking = "SELECT username, (CAST(correctAns AS float)/((quizTaken+0.0001)*5)) AS leaderboard FROM users ORDER BY leaderboard DESC LIMIT 3"
+  const ranking = "SELECT username, (CAST(correctAns AS float)/((quizTaken+0.0001)*1)*100) AS leaderboard FROM users ORDER BY leaderboard DESC LIMIT 3"
 
   db.any(ranking)
     .then((ranking)=>{

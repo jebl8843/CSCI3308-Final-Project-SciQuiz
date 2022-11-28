@@ -12,10 +12,13 @@
 
 <script>
     function quizOver(correct) {
+        console.log(correct);
         const form = document.querySelector('#quizOverForm')
+        console.log(form);
         form.querySelector('input[name="location"]').value = window.location;
         form.querySelector('input[name="correct"]').value = correct;
         form.submit();
+        console.log("here");
     }
 
     const tick = setInterval(() => {
@@ -78,8 +81,9 @@
                         <tbody>
                             <% for(let i = 0; i < question.answers.length; i++) {%>
                                 <tr>
-                                    <form method="post" action="answer">
-                                        <button type="submit" onclick=  id="answer" name="answer" value=<%-`"${question.answers[i]}"`%>> <%- question.answers[i]%> </button>
+                                    <form method="post" action="profile">
+                                        <input type="hidden" name="correctans" value=<%= question.correct == question.answers[i] ? 1:0%>>
+                                        <button type="submit" onclick="setTimeout(()=> quizOver(true),1)" id="answer"> <%- question.answers[i]%> </button>
                                     </form>
                                 </tr>
                             <%}%>
