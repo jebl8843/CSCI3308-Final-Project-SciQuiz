@@ -225,6 +225,7 @@ app.get('/quiz', async (req, res) => {
     res.render('pages/quiz', {question});
 });
 
+
 /**
  * Called when a user ends a quiz, either they won or lost.
  * @param {boolean} correct - True if the user won, false if they lost.

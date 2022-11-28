@@ -78,8 +78,8 @@
                         <tbody>
                             <% for(let i = 0; i < question.answers.length; i++) {%>
                                 <tr>
-                                    <form method action="quiz">
-                                        <button type="submit" id="answer" name="answer" value=<%-`"${question.answers[i]}"`%>> <%- question.answers[i]%> </button>
+                                    <form method="post" action="answer">
+                                        <button type="submit" onclick=  id="answer" name="answer" value=<%-`"${question.answers[i]}"`%>> <%- question.answers[i]%> </button>
                                     </form>
                                 </tr>
                             <%}%>
