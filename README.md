@@ -12,7 +12,7 @@
 - "Quiz over" screen fully functional
 - Quiz has a countdown timer that redirects to "quiz over" screen
 - Quiz buttons work. Quiz taking process fully done and updates profile/leaderboard accordingly.
-
+- DEPLOYED FULLY FUNCTIONAL BUILD
 ## Week 11/17
 
 - Successfully loading category options on the home page. Clicking any of the options brings you to the quiz section which is successfully displaying quiz questions.
