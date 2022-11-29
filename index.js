@@ -84,15 +84,17 @@ app.get('/home', (req, res) =>
     const username = req.body.username;
     const hash = await bcrypt.hash(req.body.password, 10);
     const query = "SELECT * FROM users WHERE username = $1";
+
     const values = [username, hash];
     db.one(query, values)
             .then(async (data) => {
-            // user.username = data.username;
-            // user.password = data.password;
-            const match = await bcrypt.compare(hash, data.password);
-            // console.log(match)
+            const hash2 = await bcrypt.hash(req.body.password, 10)
+            console.log(hash2);
+            console.log(values);
+            const match = await bcrypt.compare(req.body.password, data.password);
+            console.log(match)
             
-            if (match)
+            if (!match)
             {
                // pass didnt match
                console.log('pass didnt match');
@@ -122,6 +124,8 @@ app.get('/home', (req, res) =>
 
     const user = req.body.username;
     const hash = await bcrypt.hash(req.body.password, 10);
+    console.log(hash);
+    console.log(req.body.password);
     const query = "INSERT INTO users (username, password, quizTaken, correctAns) VALUES ($1, $2, 0, 0);";
     const q2 = "SELECT * FROM users WHERE username = $1;";
     db.task ('get-everything', task => {
