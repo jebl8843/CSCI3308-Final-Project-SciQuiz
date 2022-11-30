@@ -219,7 +219,7 @@ app.get('/gentest',(req,res) =>
 
 app.get('/leaderboard',(req,res) =>
 {
-  const ranking = "SELECT username, (CAST(correctAns AS float)/((quizTaken+0.0001)*1)*100) AS leaderboard FROM users ORDER BY leaderboard DESC 10"
+  const ranking = "SELECT username, (CAST(correctAns AS float)/((quizTaken+0.0001)*1)*100) AS leaderboard FROM users ORDER BY leaderboard DESC"
 
   db.any(ranking)
     .then((ranking)=>{
