@@ -12,3 +12,8 @@ Updating project board - defining the SQL database the table and the values in t
 
 discussed background.js file and the different API calls we will need to use
     -- defined the different post/get/put calls for each function
+
+Deliverables: 
+ - unit test plan
+ - basic outline files of ejs
+ - update index.js with basics

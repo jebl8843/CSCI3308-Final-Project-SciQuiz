@@ -10,3 +10,8 @@ Team meeting
     -- fixed register and login api calls
     -- need to do quiz api call and profile api call 
         - need to format the ejs pages of above pages as well 
+
+Deliverables
+ - quiz api call 
+ - profile api call 
+ - leaderboard api call 

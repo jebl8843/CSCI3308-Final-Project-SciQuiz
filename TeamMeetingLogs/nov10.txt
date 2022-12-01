@@ -11,3 +11,8 @@ Team
     - talked about next goals
     - adding epic and user stories, finishing some as well
     - worked on index.js calls as well 
+
+Deliverables
+ - update logs 
+ - improve register and login calls to work
+ - make home page and home call 

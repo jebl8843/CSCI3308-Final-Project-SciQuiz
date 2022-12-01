@@ -1,0 +1,11 @@
+Group Meeting
+ - discussed final changes to project
+ - final bugs and other issues from testing 
+ - created project report
+ - created presentation 
+ - figured out deployment issues 
+
+Deliverables
+ - Project report 
+ - Presentation 
+ - full website ready to go 

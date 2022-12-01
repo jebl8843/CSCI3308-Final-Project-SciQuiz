@@ -8,3 +8,8 @@ After
     - Meeting with team, fixed docker issues
     - worked on profile, home Calls in index.js
     - working on something to depoloy
+
+Deliverables
+ - deployable home page by thursday
+ - more presentable front end 
+ - find better API to use

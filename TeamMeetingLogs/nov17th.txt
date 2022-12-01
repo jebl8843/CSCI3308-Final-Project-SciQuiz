@@ -3,4 +3,10 @@ Recitation/Lab meeting
 Finished the database issues
 finished the "look" of all the pages
 addressed bugs in the login and register pages 
-created calls for login, register, home and the questions call for the quiz
+worked on calls for login, register, home and the questions call for the quiz
+
+Deliverables
+ - finish barebones website 
+ - figure out full deployment 
+ - UATS
+ - fix minor bugs
