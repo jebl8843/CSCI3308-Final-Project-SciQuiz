@@ -154,9 +154,10 @@ const auth = (req, res, next) => {
 };
 
 app.get('/profile', async (req, res) => {
-    if(req.session.user === undefined){
+    if(req.session === undefined || req.session.user === undefined){
         console.log("error no current user session");
         res.send("error no current user session");
+        return;
     }
     const user = req.session.user.username;
     const query = "SELECT * FROM users WHERE username = $1"; //no way this works first try
